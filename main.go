@@ -145,7 +145,6 @@ func ScanDirByLineInternal(f os.FileInfo, folder string, fileFilter string, line
 	pathName := filepath.Join(folder, f.Name())
 
 	isZip, _ := regexp.MatchString(".*\\.zip", f.Name())
-	isLog, _ := regexp.MatchString(".*\\.log", f.Name())
 
 	if isZip {
 		zipReader, err := zip.OpenReader(pathName)
@@ -169,7 +168,7 @@ func ScanDirByLineInternal(f os.FileInfo, folder string, fileFilter string, line
 		}
 
 		zipReader.Close()
-	} else if isLog {
+	} else {
 		table_scan(pathName, lineFilters, visitor)
 	}
 
